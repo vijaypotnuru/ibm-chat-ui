@@ -21,6 +21,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { TypeAnimation } from 'react-type-animation'
 import remarkGfm from 'remark-gfm'
 import { useToast } from '@/hooks/use-toast'
+import { v4 as uuidv4 } from 'uuid'
 
 interface Message {
   id: string
@@ -41,6 +42,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [sessionId, setSessionId] = useState<string>(uuidv4())
   const { toast } = useToast()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -52,7 +54,7 @@ export default function Chatbot() {
 
   const mutationAiChat = useMutation({
     mutationFn: (data: { prompt: string }) =>
-      aiChatApi({ prompt: data.prompt, sessionId: 'user1234' }),
+      aiChatApi({ prompt: data.prompt, sessionId }),
     onSuccess: (response) => {
       const generatedText = response.data.message[0].generated_text
       const newMessage: Message = {

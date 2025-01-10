@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import { TypeAnimation } from 'react-type-animation'
+import remarkGfm from 'remark-gfm'
 import { useToast } from '@/hooks/use-toast'
 
 interface Message {
@@ -135,6 +136,7 @@ export default function Chatbot() {
                   className={`flex-1 ${message.role === 'user' ? 'text-right' : ''}`}
                 >
                   <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
                     className={`mb-2 p-3 rounded-lg ${message.role === 'assistant' ? 'bg-[#2A2A2A]' : 'bg-blue-600'} inline-block`}
                   >
                     {message.content}

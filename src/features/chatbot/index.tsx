@@ -270,7 +270,7 @@ const ChatInput = ({
   onSubmit: (e: React.FormEvent) => void
   isLoading: boolean
 }) => (
-  <div className='absolute bottom-0 left-0 right-0 bg-transparent backdrop-blur'>
+  <div className='absolute bottom-0 left-0 right-0 bg-transparent'>
     <form onSubmit={onSubmit} className='max-w-3xl mx-auto p-4'>
       <div className='relative flex items-center'>
         <div className='absolute left-2 flex items-center gap-2'>
@@ -409,7 +409,7 @@ export default function Chatbot() {
     <div className='flex flex-col h-screen'>
       <Header />
 
-      <div className='flex-1 bg-gradient-to-b from-[#FFFFFF] via-[#FFFFFF] to-[#E9DEFE] overflow-hidden relative'>
+      <div className='flex-1 bg-gradient-to-b from-[#FFFFFF] via-[#FFFFFF]  to-[#E9DEFE] overflow-hidden relative'>
         {messages.length === 0 && !isTyping ? (
           <WelcomeScreen onExampleClick={handleExampleClick} />
         ) : (

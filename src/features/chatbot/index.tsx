@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import React, { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import { aiChatApi } from '@/http/api'
 import {
   Bot,
@@ -15,6 +15,7 @@ import {
   Mic,
   Send,
 } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
 import { TypeAnimation } from 'react-type-animation'
 import { useToast } from '@/hooks/use-toast'
 
@@ -37,7 +38,6 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
-  const [currentResponse, setCurrentResponse] = useState('')
   const { toast } = useToast()
 
   const mutationAiChat = useMutation({
@@ -134,11 +134,11 @@ export default function Chatbot() {
                 <div
                   className={`flex-1 ${message.role === 'user' ? 'text-right' : ''}`}
                 >
-                  <p
+                  <ReactMarkdown
                     className={`mb-2 p-3 rounded-lg ${message.role === 'assistant' ? 'bg-[#2A2A2A]' : 'bg-blue-600'} inline-block`}
                   >
                     {message.content}
-                  </p>
+                  </ReactMarkdown>
                   {message.role === 'assistant' && (
                     <div className='flex gap-2 text-gray-400 justify-start'>
                       <button className='hover:text-white transition-colors duration-200'>
@@ -172,14 +172,12 @@ export default function Chatbot() {
                   <Bot size={20} />
                 </div>
                 <div className='flex-1'>
-                  <p className='mb-2 p-3 rounded-lg bg-[#2A2A2A] inline-block'>
-                    <TypeAnimation
-                      sequence={[currentResponse]}
-                      wrapper='span'
-                      speed={50}
-                      style={{ display: 'inline-block' }}
-                    />
-                  </p>
+                  <TypeAnimation
+                    sequence={['Typing...']}
+                    wrapper='span'
+                    speed={50}
+                    style={{ display: 'inline-block' }}
+                  />
                 </div>
               </div>
             </div>

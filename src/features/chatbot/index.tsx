@@ -24,6 +24,7 @@ import { TypeAnimation } from 'react-type-animation'
 import remarkGfm from 'remark-gfm'
 import { v4 as uuidv4 } from 'uuid'
 import { useToast } from '@/hooks/use-toast'
+import { SidebarTrigger } from '@/components/ui/sidebar'
 
 // Types
 interface Message {
@@ -63,7 +64,11 @@ const Header = () => (
   <header className='bg-[#161616] text-white'>
     <div className='flex items-center justify-between px-4 h-12'>
       <div className='flex items-center space-x-4'>
-        <span className='font-semibold'>IBM watsonx</span>
+        <SidebarTrigger
+          variant='outline'
+          className='scale-125 sm:scale-100 bg-black'
+        />
+        <span className='font-semibold'>Ai Assistant</span>
       </div>
       <div className='flex items-center space-x-4'>
         <button className='p-2 text-gray-400 hover:text-white transition-colors'>
@@ -73,7 +78,7 @@ const Header = () => (
           <Bell size={20} />
         </button>
         <button className='flex items-center space-x-2 px-3 py-1 bg-gray-800 rounded hover:bg-gray-700 transition-colors'>
-          <span>2953645 - itz-watsonx-033</span>
+          <span>2953645 - itz-llama-3.3</span>
           <ChevronDown size={16} />
         </button>
       </div>
@@ -86,7 +91,7 @@ const WelcomeScreen = ({
 }: {
   onExampleClick: (prompt: string) => void
 }) => (
-  <div className='flex-1 flex flex-col items-center justify-start p-8 max-w-5xl mx-auto w-full'>
+  <div className='flex-1 flex flex-col items-center justify-start p-8 max-w-5xl mx-auto w-full mb-11'>
     <div className='w-full space-y-8'>
       <div className='space-y-4'>
         <h2 className='text-xl font-semibold text-gray-800'>
@@ -186,7 +191,7 @@ const ChatMessage = ({
     }`}
   >
     <div
-      className={`flex items-start gap-4 ${
+      className={`flex items-start gap-4 mb-11 ${
         message.role === 'user' ? 'flex-row-reverse' : ''
       }`}
     >
